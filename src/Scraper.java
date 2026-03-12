@@ -8,7 +8,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class Scraper {
-    public static List<String> Scraping(String args, String names) throws IOException {
+    public static List<String> Scraping(String args, String names) {
         List<String> samples = new ArrayList<>();
         try {
             Document document = Jsoup.connect("https://atcoder.jp/contests/" + args + "/tasks/" + args + "_" + names).get();
@@ -30,7 +30,7 @@ public class Scraper {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error:" + e.getMessage());
+            throw new RuntimeException(e);
         }
         return samples;
     }
