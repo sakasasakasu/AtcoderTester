@@ -30,9 +30,6 @@ public class BuildProcess {
             }
         }
 
-        int endCode = process.waitFor();
-
-        System.out.println(endCode);
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }
