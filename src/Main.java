@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
         //配列を受け取る。空なら返す。
         if (args.length >= 3) {
             List<String> samples = Scraper.Scraping(args[1], args[2]);
