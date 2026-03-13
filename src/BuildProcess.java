@@ -30,7 +30,7 @@ public class BuildProcess {
             }
         }
 
-        } catch (InterruptedException | IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
