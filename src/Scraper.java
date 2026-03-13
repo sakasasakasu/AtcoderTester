@@ -11,7 +11,8 @@ public class Scraper {
     public static List<String> Scraping(String args, String names) {
         List<String> samples = new ArrayList<>();
         try {
-            Document document = Jsoup.connect("https://atcoder.jp/contests/" + args + "/tasks/" + args + "_" + names).get();
+            Document document;
+            document = Jsoup.connect("https://atcoder.jp/contests/" + args + "/tasks/" + args + "_" + names).get();
             Elements parts = document.select("div.part");
             System.out.println("https://atcoder.jp/contests/" + args + "/tasks/" + args + "_" + names);
 

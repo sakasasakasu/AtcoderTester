@@ -1,21 +1,22 @@
 import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 import java.util.Objects;
 
 public class Executor {
     public static String run(String targetFile, String inputData, String successData) {
         StringBuilder results = new StringBuilder();
         try{
-        ProcessBuilder check = new ProcessBuilder("java", targetFile);
+        ProcessBuilder check = new ProcessBuilder("java" , targetFile);
         check.redirectErrorStream(true);
         Process process = check.start();
+        int exitCode = process.waitFor();
 
-        try (PrintWriter result = new PrintWriter(new OutputStreamWriter(process.getOutputStream(),StandardCharsets.UTF_8)) ) {
+        try (PrintWriter result = new PrintWriter(new OutputStreamWriter(process.getOutputStream(), Charset.forName("MS932"))) ) {
             result.print(inputData);
             result.flush();
         }
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(),StandardCharsets.UTF_8))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(),Charset.forName("MS932")))) {
             StringBuilder answer = new StringBuilder();
             String line;
             results.append("\n");
@@ -24,17 +25,23 @@ public class Executor {
                 results.append(line);
                 results.append("\n");
             }
-            if (Objects.equals(answer.toString().trim(), successData.trim())) {
-                System.out.println("AC" + "\n" + answer + successData);
+
+            if (exitCode != 0) {
+                System.out.println("RE" + "\n" + answer.toString().trim() + successData.trim());
+                results.append("\nRE\n");
+            }
+
+            else if (Objects.equals(answer.toString().trim(), successData.trim())) {
+                System.out.println("AC" + "\n" + answer.toString().trim() + successData.trim());
                 results.append("\nAC\n");
 
             } else {
-                System.out.println("WA" + "\n" + answer + successData);
-                results.append("\nAC\n");
+                System.out.println("WA" + "\n" + answer.toString().trim() + successData.trim());
+                results.append("\nWA\n");
             }
         }
 
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
         return results.toString();
