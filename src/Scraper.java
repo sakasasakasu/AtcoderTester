@@ -30,6 +30,7 @@ public class Scraper {
                     }
                 }
             }
+            System.out.println("スクレイプドアンサーイズ:" + samples);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
