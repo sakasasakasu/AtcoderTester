@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="atcoderTester:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/atcoderTester_jar</output-path>
+    <root id="archive" name="atcoderTester.jar">
+      <element id="module-output" name="atcoderTester" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jsoup/jsoup/1.18.1/jsoup-1.18.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
